@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Face</title>
+  <link rel="stylesheet" type="text/css" href="css/styles.css">
+</head>
+<body>
+
+<div class="stage">
+  <div class="beard"></div>
+  <div class="face"></div>
+  <div class="ear left"></div>
+  <div class="ear right"></div>
+  <div class="eye left"></div>
+  <div class="eye right"></div>
+  <div class="eye-inside left"></div>
+  <div class="eye-inside right"></div>
+  <div class="eyebrow left"></div>
+  <div class="eyebrow right"></div>
+  <div class="mouth"></div>
+  <div class="hair"></div>
+  <div class="hair-left"></div>
+  <div class="hair-right"></div>
+  <div class="horn first"></div>
+  <div class="horn last"></div>
+  <div class="nose"></div>
+</div>
+
+<div class="tolk tolk_start">CLICK AND TOLK</div>
+
+<script src="js/jquery.min.js"></script>
+<script src="js/annyang.min.js"></script>
+<script src="js/responsivevoice.js"></script>
+
+<script>
+responsiveVoice.setDefaultVoice("US English Male");
+
+window.step = 1;
+  
+var commands = {
+    'hello': function() {
+      if(step == 1) {
+        responsiveVoice.speak("Hi, Tell me what you want!");
+        setTimeout(function() { $('.tolk').html('Say: Read Hemingway'); }, 2500);
+       
+        window.step = 2;
+      }
+    },
+    'Read Hemingway': function() {
+      
+      if(window.step == 2) {
+        
+        window.step = 3;
+        
+        setTimeout(function() { 
+          $('.tolk').css('background-color', '#555555');
+          $('.tolk').html('Speaking...'); 
+        }, 1000);
+
+         responsiveVoice.speak("Ok, The Old Man and the Sea. He was an old man who fished alone in a skiff in the Gulf Stream and he had gone eighty-four days now without taking a fish. In the first forty days a boy had been with him. But after forty days without a fish the boy’s parents had told him that the old man was now definitely and finally salao, which is the worst form of unlucky, and the boy had gone at their orders in another boat which caught three good fish the first week. It made the boy sad to see the old man come in each day with his skiff empty and he always went down to help him carry either the coiled lines or the gaff and harpoon and the sail that was furled around the mast. The sail was patched with flour sacks and, furled, it looked like the flag of permanent defeat. The old man was thin and gaunt with deep wrinkles in the back of his neck. The brown blotches of the benevolent skin cancer the sun brings from its [9] reflection on the tropic sea were on his cheeks. The blotches ran well down the sides of his face and his hands had the deep-creased scars from handling heavy fish on the cords. But none of these scars were fresh. They were as old as erosions in a fishless desert. Everything about him was old except his eyes and they were the same color as the sea and were cheerful and undefeated."); 
+      }
+    },
+};
+
+annyang.addCommands(commands);
+annyang.setLanguage('en');
+  
+$('.tolk_start').click(function() {
+  window.step = 1;
+  
+  $(this).removeClass('tolk_start');
+  $(this).css('background-color', '#ea535e');
+  $(this).html('Say: Hello');
+  annyang.start();
+});
+ 
+</script>
+</body>
+</html>
